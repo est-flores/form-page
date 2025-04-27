@@ -73,6 +73,19 @@ export default function Home() {
             await mobileVideo.play();
             setVideosLoaded(prev => ({ ...prev, mobile: true }));
             
+            // Ensure loop is properly set
+            mobileVideo.loop = true;
+            
+            // Add event listener to handle end of video
+            mobileVideo.addEventListener('ended', () => {
+              if (mobileVideoRef.current) {
+                mobileVideoRef.current.currentTime = 0;
+                mobileVideoRef.current.play().catch(error => {
+                  console.error("Mobile video replay failed:", error);
+                });
+              }
+            });
+            
             // After initial play, preload the higher quality version for later
             setTimeout(() => {
               if (!mobileVideoRef.current) return;
@@ -89,6 +102,7 @@ export default function Home() {
                   const currentTime = mobileVideoRef.current.currentTime;
                   mobileVideoRef.current.src = '/mobile.mp4';
                   mobileVideoRef.current.currentTime = currentTime;
+                  mobileVideoRef.current.loop = true; // Ensure loop is set after src change
                   mobileVideoRef.current.play().catch(error => {
                     console.error("Mobile video high quality playback failed:", error);
                   });
@@ -104,6 +118,7 @@ export default function Home() {
         } else if (mobileVideoRef.current && videosLoaded.mobile) {
           // If already loaded, just play
           mobileVideoRef.current.currentTime = 0;
+          mobileVideoRef.current.loop = true; // Ensure loop is set
           mobileVideoRef.current.play().catch(error => {
             console.error("Mobile video playback failed:", error);
           });
@@ -123,6 +138,19 @@ export default function Home() {
             await desktopVideo.play();
             setVideosLoaded(prev => ({ ...prev, desktop: true }));
             
+            // Ensure loop is properly set
+            desktopVideo.loop = true;
+            
+            // Add event listener to handle end of video
+            desktopVideo.addEventListener('ended', () => {
+              if (desktopVideoRef.current) {
+                desktopVideoRef.current.currentTime = 0;
+                desktopVideoRef.current.play().catch(error => {
+                  console.error("Desktop video replay failed:", error);
+                });
+              }
+            });
+            
             // After initial play, preload the higher quality version for later
             setTimeout(() => {
               if (!desktopVideoRef.current) return;
@@ -139,6 +167,7 @@ export default function Home() {
                   const currentTime = desktopVideoRef.current.currentTime;
                   desktopVideoRef.current.src = '/desktop.mp4';
                   desktopVideoRef.current.currentTime = currentTime;
+                  desktopVideoRef.current.loop = true; // Ensure loop is set after src change
                   desktopVideoRef.current.play().catch(error => {
                     console.error("Desktop video high quality playback failed:", error);
                   });
@@ -154,6 +183,7 @@ export default function Home() {
         } else if (desktopVideoRef.current && videosLoaded.desktop) {
           // If already loaded, just play
           desktopVideoRef.current.currentTime = 0;
+          desktopVideoRef.current.loop = true; // Ensure loop is set
           desktopVideoRef.current.play().catch(error => {
             console.error("Desktop video playback failed:", error);
           });
@@ -169,7 +199,7 @@ export default function Home() {
   // Render both videos but control visibility with CSS
   // This avoids remounting videos which causes playback issues
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4 md:p-8 relative overflow-hidden">
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 md:p-8 relative overflow-hidden bg-stone-900">
       {/* Both videos are always in DOM, but only one is visible */}
       <video
         ref={mobileVideoRef}
