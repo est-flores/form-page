@@ -101,7 +101,7 @@ const SignupForm: React.FC = () => {
       
       <div className="space-y-1">
         <label htmlFor="phone" className="block text-xs text-white uppercase tracking-wider font-medium">
-          TELEFONO
+          TELÉFONO
         </label>
         <input
           type="tel"
