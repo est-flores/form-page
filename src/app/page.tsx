@@ -2,6 +2,7 @@
 
 import CountdownTimer from "@/components/CountdownTimer";
 import SignupForm from "@/components/SignupForm";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -10,13 +11,17 @@ export default function Home() {
       <div className="absolute inset-0 opacity-10 bg-cover bg-center z-0"></div>
       
       <div className="w-full max-w-md md:max-w-xl relative z-10 backdrop-blur-sm bg-white/30 p-6 md:p-8 rounded-2xl shadow-sm">
-        {/* Brand Name */}
-        <h1 className="text-center text-3xl md:text-4xl font-light text-neutral-800 tracking-widest mb-1">
-          PITA GOV NUDO
-        </h1>
-        <p className="text-center text-sm md:text-base text-neutral-600 tracking-wide mb-6">
-          MATERNITY LIFESTYLE
-        </p>
+        {/* Logo */}
+        <div className="flex justify-center mb-6">
+          <Image 
+            src="/pita-con.nudo.png" 
+            alt="PITA CON NUDO - MATERNITY LIFESTYLE" 
+            width={250} 
+            height={100}
+            className="h-auto"
+            priority
+          />
+        </div>
 
         {/* Countdown Timer */}
         <CountdownTimer />
