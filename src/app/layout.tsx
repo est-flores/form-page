@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Pita Con Nudo",
+  title: "Pita Con Nudo | Maternity Lifestyle",
   description: "Maternity Lifestyle",
 };
 
