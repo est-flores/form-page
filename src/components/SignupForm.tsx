@@ -2,12 +2,18 @@ import React, { useState } from 'react';
 
 const SignupForm: React.FC = () => {
   const [formData, setFormData] = useState({
-    nombre: "",
-    correo: "",
-    telefono: ""
+    fullName: "",
+    email: "",
+    phone: "",
+    message: ""
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    success?: boolean;
+    message?: string;
+  }>({});
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -15,23 +21,61 @@ const SignupForm: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Logic for form submission would go here
-    console.log("Form submitted:", formData);
+    setIsSubmitting(true);
+    setSubmitStatus({});
+    
+    try {
+      const response = await fetch('https://formula-mailer-proxy.vercel.app/api/messages/pita-con-nudo', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+      
+      const data = await response.json();
+      
+      if (response.ok) {
+        setSubmitStatus({
+          success: true,
+          message: "¡Gracias! Nos pondremos en contacto contigo pronto."
+        });
+        setFormData({
+          fullName: "",
+          email: "",
+          phone: "",
+          message: ""
+        });
+      } else {
+        setSubmitStatus({
+          success: false,
+          message: data.message || "Error al enviar el formulario"
+        });
+      }
+    } catch (error) {
+      setSubmitStatus({
+        success: false,
+        message: "Error de conexión. Intenta nuevamente."
+      });
+      console.error("Form submission error:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <div className="space-y-1">
-        <label htmlFor="nombre" className="block text-xs text-white uppercase tracking-wider font-medium">
+        <label htmlFor="fullName" className="block text-xs text-white uppercase tracking-wider font-medium">
           NOMBRE
         </label>
         <input
           type="text"
-          id="nombre"
-          name="nombre"
-          value={formData.nombre}
+          id="fullName"
+          name="fullName"
+          value={formData.fullName}
           onChange={handleChange}
           className="w-full bg-white/80 backdrop-blur-sm rounded-xl p-3.5 border border-neutral-200 focus:outline-none focus:ring-1 focus:ring-[#A67E6B]"
           required
@@ -40,14 +84,14 @@ const SignupForm: React.FC = () => {
       </div>
       
       <div className="space-y-1">
-        <label htmlFor="correo" className="block text-xs text-white uppercase tracking-wider font-medium">
+        <label htmlFor="email" className="block text-xs text-white uppercase tracking-wider font-medium">
           CORREO
         </label>
         <input
           type="email"
-          id="correo"
-          name="correo"
-          value={formData.correo}
+          id="email"
+          name="email"
+          value={formData.email}
           onChange={handleChange}
           className="w-full bg-white/80 backdrop-blur-sm rounded-xl p-3.5 border border-neutral-200 focus:outline-none focus:ring-1 focus:ring-[#A67E6B]"
           required
@@ -56,14 +100,14 @@ const SignupForm: React.FC = () => {
       </div>
       
       <div className="space-y-1">
-        <label htmlFor="telefono" className="block text-xs text-white uppercase tracking-wider font-medium">
+        <label htmlFor="phone" className="block text-xs text-white uppercase tracking-wider font-medium">
           TELEFONO
         </label>
         <input
           type="tel"
-          id="telefono"
-          name="telefono"
-          value={formData.telefono}
+          id="phone"
+          name="phone"
+          value={formData.phone}
           onChange={handleChange}
           className="w-full bg-white/80 backdrop-blur-sm rounded-xl p-3.5 border border-neutral-200 focus:outline-none focus:ring-1 focus:ring-[#A67E6B]"
           required
@@ -71,11 +115,18 @@ const SignupForm: React.FC = () => {
         />
       </div>
       
+      {submitStatus.message && (
+        <div className={`p-3 rounded-lg text-center ${submitStatus.success ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+          {submitStatus.message}
+        </div>
+      )}
+      
       <button
         type="submit"
-        className="w-full bg-[#C4937A] hover:bg-[#B58369] text-white py-3.5 px-6 rounded-xl transition-colors mt-6 font-medium"
+        disabled={isSubmitting}
+        className="w-full bg-[#C4937A] hover:bg-[#B58369] text-white py-3.5 px-6 rounded-xl transition-colors mt-6 font-medium disabled:opacity-70"
       >
-        Quiero ser parte del cambio
+        {isSubmitting ? "Enviando..." : "Quiero ser parte del cambio"}
       </button>
       
       <p className="text-xs text-center text-white mt-2">

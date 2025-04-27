@@ -73,7 +73,7 @@ const CountdownTimer: React.FC = () => {
 
   return (
     <div className="bg-[#FFF1E6] rounded-2xl p-4 mb-8">
-      <p className="text-center text-[#A67E6B] font-bold mb-3">PRONTO!</p>
+      <p className="text-center text-[#A67E6B] font-bold mb-3">¡PRONTO!</p>
       <div className="flex justify-center items-center gap-2">
         {/* Days */}
         <div className="flex gap-1">
