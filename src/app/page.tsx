@@ -116,9 +116,9 @@ export default function Home() {
       </div>
       
       {/* Dark overlay to ensure content is readable */}
-      <div className="absolute inset-0 bg-black/20 z-10"></div>
+      {/* <div className="absolute inset-0 bg-black/20 z-10"></div> */}
       
-      <div className="w-full max-w-md md:max-w-xl relative z-20 backdrop-blur-sm bg-white/5 p-6 md:p-8 rounded-2xl shadow-sm">
+      <div className="w-full max-w-md md:max-w-xl relative z-20 bg-white/0 p-6 md:p-8 rounded-2xl">
         {/* Logo */}
         <div className="flex justify-center mb-6">
           <Image 
