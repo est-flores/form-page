@@ -119,12 +119,7 @@ const CountdownTimer: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-center text-xs text-[#A67E6B] mt-1">
-        <span className="w-[54px] md:w-[64px] text-center font-medium">DÍAS</span>
-        <span className="w-[54px] md:w-[64px] text-center font-medium">HORAS</span>
-        <span className="w-[54px] md:w-[64px] text-center font-medium">MIN</span>
-        <span className="w-[54px] md:w-[64px] text-center font-medium">SEG</span>
-      </div>
+     
     </div>
   );
 };
