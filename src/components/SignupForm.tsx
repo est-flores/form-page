@@ -24,7 +24,7 @@ const SignupForm: React.FC = () => {
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <div className="space-y-1">
-        <label htmlFor="nombre" className="block text-xs text-neutral-600 uppercase tracking-wider font-medium">
+        <label htmlFor="nombre" className="block text-xs text-white uppercase tracking-wider font-medium">
           NOMBRE
         </label>
         <input
@@ -40,7 +40,7 @@ const SignupForm: React.FC = () => {
       </div>
       
       <div className="space-y-1">
-        <label htmlFor="correo" className="block text-xs text-neutral-600 uppercase tracking-wider font-medium">
+        <label htmlFor="correo" className="block text-xs text-white uppercase tracking-wider font-medium">
           CORREO
         </label>
         <input
@@ -56,7 +56,7 @@ const SignupForm: React.FC = () => {
       </div>
       
       <div className="space-y-1">
-        <label htmlFor="telefono" className="block text-xs text-neutral-600 uppercase tracking-wider font-medium">
+        <label htmlFor="telefono" className="block text-xs text-white uppercase tracking-wider font-medium">
           TELEFONO
         </label>
         <input
@@ -78,7 +78,7 @@ const SignupForm: React.FC = () => {
         Quiero ser parte del cambio
       </button>
       
-      <p className="text-xs text-center text-neutral-500 mt-2">
+      <p className="text-xs text-center text-white mt-2">
         *Todos los campos son requeridos para crear tu cuenta
       </p>
     </form>

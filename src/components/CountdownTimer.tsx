@@ -70,11 +70,10 @@ const CountdownTimer: React.FC = () => {
   const daysDigits = splitDigits(timeLeft.days);
   const hoursDigits = splitDigits(timeLeft.hours);
   const minutesDigits = splitDigits(timeLeft.minutes);
-  const secondsDigits = splitDigits(timeLeft.seconds);
 
   return (
     <div className="bg-[#FFF1E6] rounded-2xl p-4 mb-8">
-      <p className="text-center text-[#A67E6B] font-medium mb-3">PRONTO!</p>
+      <p className="text-center text-[#A67E6B] font-bold mb-3">PRONTO!</p>
       <div className="flex justify-center items-center gap-2">
         {/* Days */}
         <div className="flex gap-1">
@@ -107,17 +106,7 @@ const CountdownTimer: React.FC = () => {
             {minutesDigits[1]}
           </div>
         </div>
-        <div className="text-[#A67E6B] text-2xl font-bold">:</div>
         
-        {/* Seconds */}
-        <div className="flex gap-1">
-          <div className="bg-[#A67E6B] w-10 h-14 md:w-12 md:h-16 rounded flex items-center justify-center text-white font-bold text-xl md:text-2xl">
-            {secondsDigits[0]}
-          </div>
-          <div className="bg-[#A67E6B] w-10 h-14 md:w-12 md:h-16 rounded flex items-center justify-center text-white font-bold text-xl md:text-2xl">
-            {secondsDigits[1]}
-          </div>
-        </div>
       </div>
      
     </div>
