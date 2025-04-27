@@ -72,52 +72,48 @@ const CountdownTimer: React.FC = () => {
   const minutesDigits = splitDigits(timeLeft.minutes);
 
   return (
-    <div className="bg-[#FFF1E6] rounded-2xl p-4 mb-8">
+    <div className="bg-[#FFF1E6] rounded-2xl p-4 px-2 sm:px-4 mb-8">
       <p className="text-center text-[#A67E6B] font-bold mb-3">¡PRONTO!</p>
-      <div className="flex justify-center items-center gap-2">
+      <div className="flex flex-wrap justify-center items-center gap-0.5 sm:gap-2">
         {/* Days */}
-        <div className="flex flex-col items-center">
-          <div className="flex gap-1">
-            <div className="bg-[#A67E6B] w-10 h-14 md:w-12 md:h-16 rounded flex items-center justify-center text-white font-bold text-xl md:text-2xl">
+        <div className="flex flex-col items-center min-w-0">
+          <div className="flex gap-0.5 sm:gap-1">
+            <div className="bg-[#A67E6B] w-8 h-12 sm:w-10 sm:h-14 md:w-12 md:h-16 rounded flex items-center justify-center text-white font-bold text-base sm:text-xl md:text-2xl min-w-0 flex-shrink">
               {daysDigits[0]}
             </div>
-            <div className="bg-[#A67E6B] w-10 h-14 md:w-12 md:h-16 rounded flex items-center justify-center text-white font-bold text-xl md:text-2xl">
+            <div className="bg-[#A67E6B] w-8 h-12 sm:w-10 sm:h-14 md:w-12 md:h-16 rounded flex items-center justify-center text-white font-bold text-base sm:text-xl md:text-2xl min-w-0 flex-shrink">
               {daysDigits[1]}
             </div>
           </div>
-          <span className="text-[#A67E6B] text-s mt-1">Días</span>
+          <span className="text-[#A67E6B] text-xs sm:text-s mt-1">Días</span>
         </div>
-        <div className="text-[#A67E6B] text-2xl font-bold">:</div>
-        
+        <div className="text-[#A67E6B] text-xl sm:text-2xl font-bold">:</div>
         {/* Hours */}
-        <div className="flex flex-col items-center">
-          <div className="flex gap-1">
-            <div className="bg-[#A67E6B] w-10 h-14 md:w-12 md:h-16 rounded flex items-center justify-center text-white font-bold text-xl md:text-2xl">
+        <div className="flex flex-col items-center min-w-0">
+          <div className="flex gap-0.5 sm:gap-1">
+            <div className="bg-[#A67E6B] w-8 h-12 sm:w-10 sm:h-14 md:w-12 md:h-16 rounded flex items-center justify-center text-white font-bold text-base sm:text-xl md:text-2xl min-w-0 flex-shrink">
               {hoursDigits[0]}
             </div>
-            <div className="bg-[#A67E6B] w-10 h-14 md:w-12 md:h-16 rounded flex items-center justify-center text-white font-bold text-xl md:text-2xl">
+            <div className="bg-[#A67E6B] w-8 h-12 sm:w-10 sm:h-14 md:w-12 md:h-16 rounded flex items-center justify-center text-white font-bold text-base sm:text-xl md:text-2xl min-w-0 flex-shrink">
               {hoursDigits[1]}
             </div>
           </div>
-          <span className="text-[#A67E6B] text-s mt-1">Horas</span>
+          <span className="text-[#A67E6B] text-xs sm:text-s mt-1">Horas</span>
         </div>
-        <div className="text-[#A67E6B] text-2xl font-bold">:</div>
-        
+        <div className="text-[#A67E6B] text-xl sm:text-2xl font-bold">:</div>
         {/* Minutes */}
-        <div className="flex flex-col items-center">
-          <div className="flex gap-1">
-            <div className="bg-[#A67E6B] w-10 h-14 md:w-12 md:h-16 rounded flex items-center justify-center text-white font-bold text-xl md:text-2xl">
+        <div className="flex flex-col items-center min-w-0">
+          <div className="flex gap-0.5 sm:gap-1">
+            <div className="bg-[#A67E6B] w-8 h-12 sm:w-10 sm:h-14 md:w-12 md:h-16 rounded flex items-center justify-center text-white font-bold text-base sm:text-xl md:text-2xl min-w-0 flex-shrink">
               {minutesDigits[0]}
             </div>
-            <div className="bg-[#A67E6B] w-10 h-14 md:w-12 md:h-16 rounded flex items-center justify-center text-white font-bold text-xl md:text-2xl">
+            <div className="bg-[#A67E6B] w-8 h-12 sm:w-10 sm:h-14 md:w-12 md:h-16 rounded flex items-center justify-center text-white font-bold text-base sm:text-xl md:text-2xl min-w-0 flex-shrink">
               {minutesDigits[1]}
             </div>
           </div>
-          <span className="text-[#A67E6B] text-s mt-1">Minutos</span>
+          <span className="text-[#A67E6B] text-xs sm:text-s mt-1">Minutos</span>
         </div>
-        
       </div>
-     
     </div>
   );
 };
