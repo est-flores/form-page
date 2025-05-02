@@ -12,17 +12,65 @@ const SignupForm: React.FC = () => {
     success?: boolean;
     message?: string;
   }>({});
+  const [phoneError, setPhoneError] = useState("");
+  const [emailError, setEmailError] = useState("");
+
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    
+    if (name === 'phone') {
+      // Only allow digits in phone field
+      const digitsOnly = value.replace(/\D/g, '');
+      
+      if (digitsOnly.length > 8) {
+        setPhoneError("El número debe tener exactamente 8 dígitos");
+      } else {
+        setPhoneError("");
+      }
+      
+      setFormData(prev => ({
+        ...prev,
+        [name]: digitsOnly
+      }));
+    } else if (name === 'email') {
+      setFormData(prev => ({
+        ...prev,
+        [name]: value
+      }));
+      
+      if (value && !validateEmail(value)) {
+        setEmailError("Por favor, ingresa un correo electrónico válido");
+      } else {
+        setEmailError("");
+      }
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: value
+      }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate phone number
+    if (formData.phone.length !== 8) {
+      setPhoneError("El número debe tener exactamente 8 dígitos");
+      return;
+    }
+    
+    // Validate email
+    if (!validateEmail(formData.email)) {
+      setEmailError("Por favor, ingresa un correo electrónico válido");
+      return;
+    }
+    
     setIsSubmitting(true);
     setSubmitStatus({});
     
@@ -93,10 +141,15 @@ const SignupForm: React.FC = () => {
           name="email"
           value={formData.email}
           onChange={handleChange}
-          className="w-full bg-white/80 backdrop-blur-sm rounded-xl p-3.5 border border-neutral-200 focus:outline-none focus:ring-1 focus:ring-[#A67E6B]"
+          className={`w-full bg-white/80 backdrop-blur-sm rounded-xl p-3.5 border ${emailError ? 'border-red-500' : 'border-neutral-200'} focus:outline-none focus:ring-1 focus:ring-[#A67E6B]`}
           required
           placeholder="correo@ejemplo.com"
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+          title="Por favor, ingresa un correo electrónico válido"
         />
+        {emailError && (
+          <p className="mt-1 text-xs text-red-500">{emailError}</p>
+        )}
       </div>
       
       <div className="space-y-1">
@@ -109,10 +162,16 @@ const SignupForm: React.FC = () => {
           name="phone"
           value={formData.phone}
           onChange={handleChange}
-          className="w-full bg-white/80 backdrop-blur-sm rounded-xl p-3.5 border border-neutral-200 focus:outline-none focus:ring-1 focus:ring-[#A67E6B]"
+          className={`w-full bg-white/80 backdrop-blur-sm rounded-xl p-3.5 border ${phoneError ? 'border-red-500' : 'border-neutral-200'} focus:outline-none focus:ring-1 focus:ring-[#A67E6B]`}
           required
           placeholder="Tu número de teléfono"
+          pattern="[0-9]{8}"
+          maxLength={8}
+          title="El número debe tener exactamente 8 dígitos"
         />
+        {phoneError && (
+          <p className="mt-1 text-xs text-red-500">{phoneError}</p>
+        )}
       </div>
       
       {submitStatus.message && (
