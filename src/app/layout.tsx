@@ -28,6 +28,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <footer className="bg-[#A67E6B] py-4 text-white text-center border-t">
+        © {new Date().getFullYear()} Todos los derechos reservados por PITA CON NUDO, SOCIEDAD ANONIMA 
+        </footer>
       </body>
     </html>
   );
