@@ -11,7 +11,7 @@ const CountdownTimer: React.FC = () => {
 
   // Start date and end date for the countdown
   const START_DATE = '2025-04-27T00:00:00';
-  const END_DATE = '2025-05-08T00:00:00';
+  const END_DATE = '2025-05-09T00:00:00';
   
   const updateTimer = () => {
     const now = new Date();
